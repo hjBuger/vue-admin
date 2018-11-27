@@ -1,0 +1,40 @@
+html{
+    height: 100%;
+}
+body,h1,h2,h3,h4,h5,h6,p,ul,ol{
+    padding: 0;
+    margin: 0;
+}
+ul,ol{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+    font-size: inherit;
+    color: inherit;
+}
+a,button,input,select,textarea{
+    outline: none;
+    font-size: inherit;
+}
+a,button,input[type='button']{
+    cursor: pointer;
+}
+a,span,i{
+    display: inline-block;
+    font-style: normal;
+}
+
+@placeholderColor:#ccc;
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:@placeholderColor;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:@placeholderColor;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:@placeholderColor;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color:@placeholderColor;
+}
