@@ -1,6 +1,16 @@
 //axios方法封装处理
 
 import axios from 'axios'
+import Utils from '../utils'
+
+//设置请求头
+if (process.env.NODE_ENV === "development") axios.defaults.baseURL = "/api";
+// 默认请求头（调试）
+else {
+    if (process.env.hash) { // 打包到本地模式
+        axios.defaults.baseURL = Utils.UrlParams('baseUrl'); // 默认请求头（生产）
+    } else axios.defaults.baseURL = "/student/"; // 默认请求头（生产）
+}
 
 let AxiosMethods = {
     //axios请求

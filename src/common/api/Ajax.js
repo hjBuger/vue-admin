@@ -1,7 +1,6 @@
-//请求api集合
-
 import Axios from './Axios'
 
+//请求api集合
 class Ajax {
     /** 登录 */
     LOGIN = (params) => Axios.post('/login', params);

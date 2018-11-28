@@ -15,10 +15,11 @@
     "@fortawesome/vue-fontawesome": "^0.1.2",
     "axios": "^0.18.0",
     "element-ui": "^2.4.11",
+    "lodash": "latest",
     "vue": "^2.5.17",
+    "vue-lazyload": "^1.2.6",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1",
-    "lodash": "latest"
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.5",

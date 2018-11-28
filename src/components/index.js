@@ -2,6 +2,8 @@ import Vue from 'vue'
 import upperFirst from 'lodash/upperFirst'
 import camelCase from 'lodash/camelCase'
 
+/** 全局注册组件 **/
+
 const requireComponent = require.context(
     // 其组件目录的相对路径
     './global/',

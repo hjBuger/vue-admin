@@ -13,9 +13,7 @@
         components:{
         },
         mounted(){
-            let form = new FormData();
-            //form.append("file",file);
-            console.log(form.constructor === FormData);
+
         }
     }
 </script>

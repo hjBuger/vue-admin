@@ -7,13 +7,15 @@
                 <label for="username">
                     <fa-icon icon="user"></fa-icon>
                 </label>
-                <input type="text" id="username" v-model="username" placeholder="请输入用户名" @focus="focusFn" maxlength="20">
+                <input type="text" id="username" v-model="username" placeholder="请输入用户名" @focus="focusFn"
+                       maxlength="20">
             </div>
             <div class="form-item">
                 <label for="password">
                     <fa-icon icon="lock"></fa-icon>
                 </label>
-                <input type="password" id="password" v-model="password" placeholder="请输入密码" @focus="focusFn" maxlength="20">
+                <input type="password" id="password" v-model="password" placeholder="请输入密码" @focus="focusFn"
+                       maxlength="20">
             </div>
             <div class="form-item submit-box">
                 <button class="toLogin" @click="toLogin">登录</button>
@@ -27,27 +29,45 @@
         name: "Login",
         data() {
             return {
-                username:'',
-                password:''
+                username: '',
+                password: '',
+                hasLastRoute: ''
             };
         },
         methods: {
-            focusFn(ev){
+            focusFn(ev) {
                 let formItem = document.querySelectorAll('.form-item');
                 formItem.forEach(item => {
-                    item.className = item.className.replace(" focus","");
+                    item.className = item.className.replace(" focus", "");
                 });
                 ev.target.parentNode.className += ' focus';
             },
-            toLogin(){
-                if(!this.valid()) return false;
+            async toLogin() {
+                //校验输入
+                /*if (!this.valid()) return false;*/
+
+                //登录
+                let res = await this.$Ajax.LOGIN({
+                    mobile:this.username,
+                    password:this.password
+                }).catch( err => {
+                    //登录失败
+                    console.log("err ",err);
+                });
+
+                //登录成功则设置token
+                this.$Utils.Cookies.set("token",res.token);
+                this.$store.commit('setToken',res.token);
+
+                //如果存在上一层路由，返回上一层路由
+                this.hasLastRoute ? this.$router.back() : this.$router.push({name: 'home'})
             },
-            valid(){
+            valid() {
                 return false;
             },
-            winSize(){
+            winSize() {
                 let dom = {
-                    width: document.documentElement.clientWidth ,
+                    width: document.documentElement.clientWidth,
                     height: document.documentElement.clientHeight
                 };
                 this.$refs.Login.style.width = dom.width + 'px';
@@ -58,6 +78,12 @@
                 }
             }
         },
+        beforeRouteEnter(to, from, next) {
+            next((vm) => {
+                //判断进入登录页之前是否存在上一层路由
+                vm.hasLastRoute = !!(from.name && from.name !== 'registered' && from.name !== 'recoverPassword');
+            })
+        },
         mounted() {
             this.winSize();
         }
@@ -65,40 +91,45 @@
 </script>
 
 <style scoped lang="less">
-    @placeholderColor:#eee;
+    @placeholderColor: #eee;
+    @itemHeight: 44px;
     ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-        color:@placeholderColor;
+        color: @placeholderColor;
     }
+
     :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-        color:@placeholderColor;
+        color: @placeholderColor;
     }
+
     ::-moz-placeholder { /* Mozilla Firefox 19+ */
-        color:@placeholderColor;
+        color: @placeholderColor;
     }
+
     :-ms-input-placeholder { /* Internet Explorer 10-11 */
-        color:@placeholderColor;
+        color: @placeholderColor;
     }
-    .Login{
+
+    .Login {
         display: flex;
         position: relative;
         overflow: hidden;
         background: url("../../assets/login-bg.jpg");
         background-size: cover;
-        .bg{
+        .bg {
             position: absolute;
             width: 100%;
             height: 100%;
             z-index: 10;
-            top:0;
+            top: 0;
             left: 0;
             filter: blur(2px);
         }
-        .login-box{
+        .login-box {
             position: absolute;
             z-index: 100;
             left: 50%;
             top: 40%;
-            transform: translate(-50%,-50%);
+            transform: translate(-50%, -50%);
             width: 450px;
             min-height: 350px;
             background: rgba(67, 67, 67, 0.3);
@@ -106,20 +137,19 @@
             box-sizing: border-box;
             border-radius: 6px;
             overflow: hidden;
-            .title{
+            .title {
                 line-height: 40px;
                 color: #fff;
                 font-size: 28px;
                 text-align: center;
                 margin-bottom: 25px;
             }
-            @itemHeight:44px;
-            .form-item{
+            .form-item {
                 display: flex;
                 margin-bottom: 25px;
                 border: 1px solid #fff;
                 height: @itemHeight;
-                label{
+                label {
                     width: @itemHeight;
                     height: 100%;
                     line-height: @itemHeight;
@@ -130,8 +160,8 @@
                     font-size: 24px;
                     background: rgba(67, 67, 67, 0.3);
                 }
-                input{
-                    flex:1;
+                input {
+                    flex: 1;
                     display: block;
                     box-sizing: border-box;
                     padding-left: 15px;
@@ -141,14 +171,14 @@
                     background: none;
                     font-size: 16px;
                 }
-                &.focus{
+                &.focus {
                     box-shadow: 0 0 7px #1da6fd;
                 }
 
-                &.submit-box{
+                &.submit-box {
                     border: none;
                     margin-top: 35px;
-                    .toLogin{
+                    .toLogin {
                         display: block;
                         flex: 1;
                         height: 100%;
@@ -157,7 +187,7 @@
                         color: #fff;
                         font-size: 18px;
 
-                        &:hover{
+                        &:hover {
                             background: #4bc72e;
                         }
                     }
