@@ -136,9 +136,4 @@ export default class Axios{
     static patch(url, data){
         return AxiosMethods.patch( url,data );
     }
-
-    //用于提交form格式数据
-    static form( url,data ){
-        return AxiosMethods.post( url,data );
-    }
 }

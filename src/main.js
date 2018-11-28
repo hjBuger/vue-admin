@@ -6,6 +6,7 @@ import store from './store'
 //element-ui
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+
 Vue.use(ElementUI);
 
 //global components
@@ -15,15 +16,23 @@ import './components'
 //plugin
 import './common/plugin/FontAwesomeIcon'
 
+//拦截器
+import Interceptors from'./common/api/Interceptors'
+
 //style
 import './common/style/base.less'
-
 
 
 Vue.config.productionTip = false;
 
 new Vue({
-  router,
-  store,
-  render: h => h(App)
+    router,
+    store,
+    render: h => h(App),
+    created(){
+
+         //拦截器
+        Interceptors();
+
+    }
 }).$mount('#app')

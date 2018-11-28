@@ -4,11 +4,14 @@
 
 <script>
     export default {
-        name: "el-icon",
+        name: "el",
         props:{
             icon:String
         },
         computed: {
+            /**
+             * @return {string}
+             */
             IconClass(){
                 return ('el-icon-' + this.icon);
             }

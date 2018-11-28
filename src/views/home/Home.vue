@@ -3,10 +3,7 @@
         <fa-icon :icon="['fas', 'user-circle']"></fa-icon>
         <fa-icon :icon="['far', 'user-circle']"></fa-icon>
         <fa-icon icon="user-circle"></fa-icon>
-        <i class="el-icon-info"></i>
-        <demo1></demo1>
-        <form-item></form-item>
-        <FormItem></FormItem>
+        <icon-far icon="user"></icon-far>
     </div>
 </template>
 
@@ -16,7 +13,9 @@
         components:{
         },
         mounted(){
-
+            let form = new FormData();
+            //form.append("file",file);
+            console.log(form.constructor === FormData);
         }
     }
 </script>

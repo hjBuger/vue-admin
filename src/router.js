@@ -13,7 +13,10 @@ export default new Router({
             path: '/',
             name: 'home',
             alias:'/home',
-            component: Home
+            component: Home,
+            meta:{
+                Auth:true
+            }
         },
         {
             path: '/login',
