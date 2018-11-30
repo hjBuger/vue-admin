@@ -1,7 +1,7 @@
 <template>
-    <div class="LayoutFooter">
+    <footer class="layout-footer">
 
-    </div>
+    </footer>
 </template>
 
 <script>
@@ -18,5 +18,8 @@
 </script>
 
 <style scoped lang="less">
-
+    .layout-footer{
+        height: 50px;
+        background: #fff;
+    }
 </style>

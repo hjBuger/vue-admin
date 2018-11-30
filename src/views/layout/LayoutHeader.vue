@@ -1,7 +1,7 @@
 <template>
-    <div class="LayoutHeader">
+    <header class="layout-header">
 
-    </div>
+    </header>
 </template>
 
 <script>
@@ -18,5 +18,9 @@
 </script>
 
 <style scoped lang="less">
-
+    .layout-header{
+        height: 50px;
+        background: #3c8dbc;
+        color: #fff;
+    }
 </style>

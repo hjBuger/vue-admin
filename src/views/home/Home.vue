@@ -1,18 +1,24 @@
 <template>
-    <div class="home">
-        <el-icon icon="info"></el-icon>
-        <fas-icon icon="user-circle"></fas-icon>
-        <far-icon icon="user-circle"></far-icon>
-    </div>
+    <Layout class="wrap">
+        home
+    </Layout>
 </template>
 
 <script>
+    import Layout from '../layout/Layout'
     export default {
         name: 'home',
         components:{
+            Layout
         },
         mounted(){
 
         }
     }
 </script>
+
+<style scoped lang="less">
+    .home{
+        display: block;
+    }
+</style>
