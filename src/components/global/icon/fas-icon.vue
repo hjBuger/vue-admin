@@ -4,7 +4,7 @@
 
 <script>
     export default {
-        name: "fas",
+        name: "fas-icon",
         props:['icon']
     }
 </script>

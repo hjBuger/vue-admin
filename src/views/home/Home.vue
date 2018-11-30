@@ -1,9 +1,8 @@
 <template>
     <div class="home">
-        <fa-icon :icon="['fas', 'user-circle']"></fa-icon>
-        <fa-icon :icon="['far', 'user-circle']"></fa-icon>
-        <fa-icon icon="user-circle"></fa-icon>
-        <icon-far icon="user"></icon-far>
+        <el-icon icon="info"></el-icon>
+        <fas-icon icon="user-circle"></fas-icon>
+        <far-icon icon="user-circle"></far-icon>
     </div>
 </template>
 

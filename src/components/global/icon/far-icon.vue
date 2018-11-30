@@ -1,10 +1,10 @@
 <template>
-    <fa-icon :icon="['fab', icon]"></fa-icon>
+    <fa-icon :icon="['far', icon]"></fa-icon>
 </template>
 
 <script>
     export default {
-        name: "fab",
+        name: "far-icon",
         props:['icon']
     }
 </script>
