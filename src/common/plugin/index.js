@@ -20,3 +20,4 @@ Vue.use(VueLazyLoad, {
     loading: '/img/lazyLoading.jpg',    //预加载图片
     attempt: 3                          //尝试加载图片数量，默认3
 });
+

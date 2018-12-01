@@ -1,14 +1,18 @@
 <template>
-    <div class="User">
+    <Layout class="wrap">
         User
-    </div>
+    </Layout>
 </template>
 
 <script>
+    import Layout from '../layout/Layout'
     export default {
         name: "User",
         data() {
             return {};
+        },
+        components:{
+            Layout
         },
         methods: {
 

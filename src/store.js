@@ -7,7 +7,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         token: Utils.Cookies.get('token'),
-        userInfo: {},
+        userInfo: {
+            username:'张三疯'
+        },
         UA:Utils.UA
     },
     mutations: {

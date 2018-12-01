@@ -1,6 +1,8 @@
 import {AxiosStatic} from 'axios';
 import Ajax from './api/Ajax';
 import Utils from './utils'
+import './plugin/jquery-3.3.1.min'
+
 export default {
     install(Vue, options){
         /** axios */
@@ -14,6 +16,9 @@ export default {
 
         /** 全局事件总线 */
         Vue.prototype.$EventBus = new Vue();
+
+        /**把jQuery放入实例下*/
+        Vue.prototype.$vQ = jQuery;
 
         /** 全局组件 */
     }
