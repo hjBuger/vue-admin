@@ -2,25 +2,37 @@ export default class VQuery{
     el = null;
     constructor(args){
         this.el = Array.from(VQuery.selector(args));
-        this.el = this.el.length >1 ? this.el : this.el[0];
         return this;
     }
 
     each(){}
 
-    addClass(){}
+    addClass(name){
+        this.el.forEach(el => {
+            el.className += " " + name;
+        });
+        return this;
+    }
 
-    removeClass(){}
+    removeClass(name){
+        let reg = new RegExp("(^" + name + "\\s*|\\s+" + name + ")" ,"g");
+        this.el.forEach(el => {
+            el.className = el.className.replace(reg,'').replace(/\s+/g," ");
+        });
+        return this;
+    }
 
-    toggleClass(){}
+    toggleClass(){
+
+    }
 
     css(){}
 
-    static selector(args){
+    selector(args){
         return document.querySelectorAll(args);
     }
 
-    static type(args){
-
+    type(args){
+        return Object.prototype.toString.call(args);
     }
 }

@@ -7,8 +7,9 @@
                     <h3 class="list-title"
                         :class="{ 'router-active':$route.name === item.routerName ,active:item.active}"
                         @click="menuHandle(item,index)">
-                        <fas-icon
-                                :icon="item.icon ? item.icon : ( item.child ? asideData.listDefaultIcon : asideData.fileDefaultIcon )"></fas-icon>
+                        <component
+                                :is="item.iconType ? item.iconType : asideData.iconType"
+                                :icon="item.icon ? item.icon : ( item.child ? asideData.listDefaultIcon : asideData.fileDefaultIcon )"></component>
                         <span>{{item.title}}</span>
                         <fas-icon :icon="item.active? 'angle-down' : 'angle-right'" v-if="item.child"></fas-icon>
                     </h3>
@@ -16,8 +17,9 @@
                         <ol class="list-child-menu" v-if="item.child" v-show="item.active">
                             <li v-for="child in item.child">
                                 <router-link :to="child.routerName ? child.routerName : '' " class="list-child-title">
-                                    <far-icon
-                                            :icon="child.icon ? child.icon : (item.childIcon ? item.childIcon : asideData.childDefaultIcon)"></far-icon>
+                                    <component
+                                            :is="child.iconType ? child.iconType : (item.childIconType ? item.childIconType : asideData.childIconType)"
+                                            :icon="child.icon ? child.icon : (item.childIcon ? item.childIcon : asideData.childDefaultIcon)"></component>
                                     <span>{{child.title}}</span>
                                 </router-link>
                             </li>
@@ -30,54 +32,43 @@
 </template>
 
 <script>
-
-
-    let demoAsideData = {
+    //aside数据设置
+    let asideData = {
         title: '菜单管理',
-        fileDefaultIcon: 'edit',        //没有子菜单的默认icon
+        fileDefaultIcon: 'edit',        //没有子菜单的默认icon，icon目前使用的是https://fontawesome.com/cheatsheet
         listDefaultIcon: 'list-ul',     //存在子菜单的默认icon
         childDefaultIcon: 'circle',     //子菜单的默认icon
+        iconType:'fas-icon',            //fas|far|fab|fal：Solid Icons、Regular Icons、Brand Icons、Light Icons
+        childIconType:'far-icon',
         menuData: [
             {
-                title: "首页",         //标题
-                routerName: 'home',         //路由
+                title: "首页",          //标题
+                routerName: 'home',     //路由
                 icon: 'home',           //自身icon
                 active: true
             },
             {
-                title: "菜单一",
+                title: "表单元素",
                 childIcon: 'file',      //子菜单的icon
                 active: false,
                 child: [
-                    {title: '子菜单一', routerName: '/#1', icon: 'edit'},
-                    {title: '子菜单二', routerName: '/#2'},
-                    {title: '子菜单三', routerName: '/#3'}
+                    {title: '表单输入', routerName: '/#1', icon: 'edit'}, //自身的icon
+                    {title: '按钮类型', routerName: '/#2'},
+                    {title: 'icon选择', routerName: '/#3'}
                 ]
             },
             {
-                title: "菜单二",
+                title: "布局元素",
                 active: false,
                 child: [
-                    {title: '子菜单一', routerName: '/#4'},
-                    {title: '子菜单二', routerName: '/#5'},
-                    {title: '子菜单三', routerName: '/#6'},
-                    {title: '子菜单四', routerName: '/#7'},
-                    {title: '子菜单五', routerName: '/#8'}
+                    {title: '标题预设', routerName: '/#4'},
+                    {title: '信息盒子', routerName: '/#5'},
+                    {title: '文本盒子', routerName: '/#6'},
+                    {title: '图文盒子', routerName: '/#7'}
                 ]
             },
             {
-                title: "菜单三",
-                active: false,
-                child: [
-                    {title: '子菜单一', routerName: '/#4'},
-                    {title: '子菜单二', routerName: '/#5'},
-                    {title: '子菜单三', routerName: '/#6'},
-                    {title: '子菜单四', routerName: '/#7'},
-                    {title: '子菜单五', routerName: '/#8'}
-                ]
-            },
-            {
-                title: "菜单四",
+                title: "用户管理",
                 routerName: 'user',
                 active: false,
                 icon: "file"
@@ -88,7 +79,7 @@
         name: "LayoutAside",
         data() {
             return {
-                asideData: demoAsideData
+                asideData: asideData
             };
         },
         filters:{
@@ -96,7 +87,7 @@
         },
         methods: {
             menuHandle(item, index) {
-
+                //menu状态
                 this.asideData.menuData.forEach(list => {
                     if (list !== item) {
                         list.active = false;
@@ -104,13 +95,13 @@
                 });
                 item.active = !item.active;
 
+                //如果设置了路由，就跳转
                 if (!!item.routerName) {
                     this.$router.push({name: item.routerName})
                 }
 
             }
         },
-        computed: {},
         mounted() {
 
         }
