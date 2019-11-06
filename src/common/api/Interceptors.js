@@ -1,5 +1,5 @@
-import router from '../../router'
-import store from '../../store'
+import router from '../../router/router'
+import store from '../../store/store'
 import Axios from 'axios'
 import Utils from '../utils'
 

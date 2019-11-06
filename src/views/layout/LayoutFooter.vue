@@ -6,7 +6,7 @@
 </template>
 
 <script>
-    import release from '@/release'
+    import release from '@/common/config/release.js'
     export default {
         name: "LayoutFooter",
         data() {
